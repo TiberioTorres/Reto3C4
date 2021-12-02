@@ -1,0 +1,21 @@
+.card{
+    max-width: 1250px;
+    min-width: 300px;
+    width: auto;
+}
+
+.container{
+    width: auto;
+    max-width: 1250px;
+    margin-top: 50px;
+}
+th{
+    background-color: #F39C12 ;
+}
+.card-header{
+color:azure;
+}
+
+
+
+

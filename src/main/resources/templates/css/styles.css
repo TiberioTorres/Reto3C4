@@ -121,3 +121,19 @@ margin-left: 4px;
     border-width: 13px 13px 0 0;
     border-color: whitesmoke transparent transparent transparent;           
 }  
+
+.inicio_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 300px;
+}
+
+.login_btn:hover {
+    color: black;
+    background-color: white;
+}
+
+.inicio_btn:hover {
+    color: black;
+    background-color: white;
+}

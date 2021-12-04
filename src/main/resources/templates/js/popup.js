@@ -4,5 +4,4 @@ function popupactive(){
 }
 function popupclose(){
     $("#container-all").removeClass("active")
-
 }

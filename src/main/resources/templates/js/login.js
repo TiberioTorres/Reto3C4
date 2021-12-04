@@ -10,7 +10,7 @@ $(document).ready(function() {
             email.indexOf(".") != -1
           ) {
         $.ajax({
-            url: `http://localhost:8080/api/user/${email}/${password}`,
+            url: `http://localhost:8084/api/user/${email}/${password}`,
             type: "GET",
             success: function(result) {
                 if(result.id != null ){

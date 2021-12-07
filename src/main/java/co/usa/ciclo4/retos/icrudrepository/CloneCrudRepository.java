@@ -5,6 +5,7 @@
 package co.usa.ciclo4.retos.icrudrepository;
 
 import co.usa.ciclo4.retos.dmodel.Clone;
+import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -14,5 +15,11 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CloneCrudRepository extends MongoRepository<Clone, Integer>{
     
-    
+    /**
+     * Metodo Query para seleccionar el registro de documento de producto, con 
+     * el valor mayor en el atributo 'id'
+     * @return 
+     */
+    public Optional<Clone> findTopByOrderByIdDesc();
+   
 }

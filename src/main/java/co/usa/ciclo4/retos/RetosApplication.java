@@ -35,6 +35,8 @@ public class RetosApplication implements CommandLineRunner {
                 new User()
             ));
             */
+            
+            //System.out.println("Usuario: " + userCrudRepository.findTopByOrderByIdDesc().get().getName());
         }
 
 }

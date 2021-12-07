@@ -76,4 +76,14 @@ public class CloneRepository {
         cloneCrudRepository.delete(clone);
     }
 
+    /**
+     * Metodo para obtener y retornar un registro de documento de producto
+     * cuyo valor de atributo 'id' sea el mayor, devuelto hacia el metodo 
+     * 'findTopByOrderByIdDesc' del CloneCrudRepository
+     * @return 
+     */
+    public Optional<Clone> getCloneWithLastId(){
+        return cloneCrudRepository.findTopByOrderByIdDesc();
+    }
+    
 }

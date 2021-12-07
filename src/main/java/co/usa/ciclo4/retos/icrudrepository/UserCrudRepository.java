@@ -52,4 +52,11 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
      */
     public Optional<User> findByEmailAndPassword(String email, String password);
     
+    /**
+     * Metodo Query para seleccionar el registro de documento de cuenta de
+     * usuario, con el valor mayor en el atributo 'id'
+     * @return 
+     */
+    public Optional<User> findTopByOrderByIdDesc();
+    
 }

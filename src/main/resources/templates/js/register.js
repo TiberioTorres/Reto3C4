@@ -12,75 +12,73 @@ $(document).ready(function() {
             password2 != "" &&
             email.indexOf("@") != -1 &&
             email.indexOf(".") != -1
-          ) {
+        ) {
             if (password === password2) {
-              $.ajax({
-                url:`http://localhost:8080/api/user/${email}`,
-                type: "GET",
-                success: function (result) {
-                  if (result == true) {
-                    alert("No fue posible crear la cuenta");
-                    clearInputs();
-                    return false;
-                  }
-                  else{
-                    $.ajax({
-                      url: "http://localhost:8080/api/user/new",
-                      type: "POST",
-                      data: JSON.stringify({
-                        email: email,
-                        password: password,
-                        name: name,
-                      }),
-                      contentType: "application/json; charset=utf-8",
-                      dataType: "json",
-                      cache: false,
-                      success: function () {
-                        alert("Cuenta creada de forma correcta");
-                        location.href="login.html";
+                $.ajax({
+                    url: `http://localhost:8084/api/user/emailexist/${email}`,
+                    type: "GET",
+                    success: function(result) {
+                        if (result == true) {
+                            alert("Correo ya existe");
+                            clearInputs();
+                            return false;
+                        } else {
+                            $.ajax({
+                                url: "http://localhost:8084/api/user/new",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    email: email,
+                                    password: password,
+                                    name: name,
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                cache: false,
+                                success: function() {
+                                    alert("Cuenta creada de forma correcta");
+                                    location.href = "index.html";
 
-                      },
-                    });
-                    
-                    
-                  }
-                },
-              });    
-              
+                                },
+                            });
+
+
+                        }
+                    },
+                });
+
             } else {
-              alert("Las contraseñas no coinciden");
-              clearInputs()
-            
+                alert("Las contraseñas no coinciden");
+                clearInputs()
 
-              return false;
+
+                return false;
             }
-          } else {
+        } else {
             re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-            if(
-            name == "" ||
-            email == "" ||
-            password == ""||
-            password2 == "")
-            {
-              alert("Todos los campos son obligatorios");
+            if (
+                name == "" ||
+                email == "" ||
+                password == "" ||
+                password2 == "") {
+                alert("Todos los campos son obligatorios");
+
+            } else if (!re.exec(email)) {
+                alert("Correo No valido");
 
             }
-            else if (!re.exec(email)){
-              alert("Correo No valido");
-              
-            }
-        
-           
-          }
-  
-  
-        
+
+
+        }
+
+
+
     })
 })
 
-function clearInputs(){
-  $("#correo").value("");
-  $("#nombre").value("");
-  $("#contraseña").value("");
-  $("#confirmar").value("");
+function clearInputs() {
+    $("#correo").value("");
+    $("#nombre").value("");
+    $("#contraseña").value("");
+    $("#confirmar").value("");
+    $("#zona").value("");
 }

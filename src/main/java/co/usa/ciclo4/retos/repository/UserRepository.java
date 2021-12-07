@@ -148,4 +148,14 @@ public class UserRepository {
         return userCrudRepository.findByEmailAndPassword(email, password);
     }
     
+    /**
+     * Metodo para obtener y retornar un registro de documento de producto
+     * cuyo valor de atributo 'id' sea el mayor, devuelto hacia el metodo 
+     * 'findTopByOrderByIdDesc' del CloneCrudRepository
+     * @return 
+     */
+    public Optional<User> getUserWithLastId(){
+        return userCrudRepository.findTopByOrderByIdDesc();
+    }
+    
 }

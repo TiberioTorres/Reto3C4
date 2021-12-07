@@ -55,6 +55,15 @@ public class CloneService {
      * @return
      */
     public Clone save(Clone clone) {
+        
+        Optional<Clone> cloneWithLastId = cloneRepository.getCloneWithLastId();
+        if(clone.getId() == null) {
+            if(cloneWithLastId.isEmpty())
+                clone.setId(1);
+            else
+                clone.setId(cloneWithLastId.get().getId() + 1);
+        }
+        
         if (clone.getBrand() == null || clone.getProcesor() == null || clone.getOs() == null
                 || clone.getDescription() == null || clone.getMemory() == null 
                 || clone.getHardDrive() == null) {
@@ -66,7 +75,6 @@ public class CloneService {
                 return cloneRepository.save(clone);
             }
         }
-
     }
 
     /**

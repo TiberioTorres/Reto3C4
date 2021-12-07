@@ -104,11 +104,17 @@ public class UserController {
      * UserService
      * @param email
      * @return 
-     */
+     *//*
+    @GetMapping("/emailexist/{email}")
+    public boolean emailExist(@PathVariable("email") String email) {
+        return userService.getUserByEmail(email);
+    }*/
+    
     @GetMapping("/emailexist/{email}")
     public boolean emailExist(@PathVariable("email") String email) {
         return userService.getUserByEmail(email);
     }
+    
     
     /**
      * Metodo para obtener y retornar un registro de cuenta de usuario por
@@ -123,5 +129,7 @@ public class UserController {
             @PathVariable("password") String password) {
         return userService.getUserEmailAndPassword(email, password);
     }
+    
+    
     
 }

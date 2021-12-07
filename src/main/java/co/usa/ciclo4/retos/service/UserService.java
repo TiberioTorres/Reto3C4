@@ -55,6 +55,15 @@ public class UserService {
      * @return 
      */
     public User save(User user) {
+        
+        Optional<User> userWithLastId = userRepository.getUserWithLastId();
+        if(user.getId() == null) {
+            if(userWithLastId.isEmpty())
+                user.setId(1);
+            else
+                user.setId(userWithLastId.get().getId() + 1);
+        }
+        
         if(user.getIdentification() == null || user.getName() == null || user.getEmail() == null || 
                 user.getPassword() == null || user.getAddress() == null || user.getCellPhone() == null || 
                 user.getZone() == null || user.getType() == null) {
@@ -203,5 +212,70 @@ public class UserService {
             return new User();
         }
     }
+
+    /**
+     * 
+     * @param email
+     * @return 
+     */
+    public boolean verifyEmail(String email) {
+        boolean flag = false;
+        List<User> users = userRepository.getAll();
+        for (User user : users) {
+            if (email.equals(user.getEmail())) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * Metodo para verificar si un usuario existe en la base de datos
+     *
+     * @param email
+     * @param pass
+     * @return
+     */
+    public User verifyUser(String email, String pass) {
+        List<User> users = userRepository.getAll();
+        User notExit = User.builder().build();
+        for (User user : users) {
+            if (email.equals(user.getEmail()) && pass.equals(user.getPassword())) {
+                return user;
+            }
+        }
+        return notExit;
+    }    
+
+    /*
+    public User save(User user) {
+        
+        //obtiene el maximo id existente en la coleccion
+        Optional<User> userIdMaximo = userRepository.lastUserId();
+        
+        //si el id del Usaurio que se recibe como parametro es nulo, entonces valida el maximo id existente en base de datos
+        if (user.getId() == null) {
+            //valida el maximo id generado, si no hay ninguno aun el primer id sera 1
+            if (userIdMaximo.isEmpty())
+                user.setId(1);
+            //si retorna informacion suma 1 al maximo id existente y lo asigna como el codigo del usuario
+            else
+                user.setId(userIdMaximo.get().getId() + 1);
+        }
+        
+        Optional<User> e = userRepository.getUserById(user.getId());
+        if (e.isEmpty()) {
+            if (emailExists(user.getEmail())==false){
+                return userRepository.save(user);
+            }else{
+                return user;
+            }
+        }else{
+            return user;
+        }
+        
+    }
+    */
+   
     
 }

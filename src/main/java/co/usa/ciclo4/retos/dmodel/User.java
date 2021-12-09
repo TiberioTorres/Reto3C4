@@ -5,11 +5,13 @@
 package co.usa.ciclo4.retos.dmodel;
 
 
-import javax.persistence.Id;
+import java.util.Date;
+//import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -40,9 +42,15 @@ public class User {
      */
     private String name;
     
-    /*private Date birthDay;*/
+    /**
+     * Atributo 'birthDay' de la Entidad
+     */    
+    private Date birthtDay;
     
-    /*private String monthBirthDay;*/
+    /**
+     * Atributo 'monthBirthDay' de la Entidad
+     */    
+    private String monthBirthtDay;
     
     /**
      * Atributo 'address' de la Entidad

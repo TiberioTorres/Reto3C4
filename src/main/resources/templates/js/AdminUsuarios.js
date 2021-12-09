@@ -1,3 +1,5 @@
+var estado = true;
+
 function closeForm() {
     $(".form-popup-bg").removeClass("is-visible");
 }
@@ -165,12 +167,14 @@ $("#btn_post_update").click(function() {
 function usrEmailExist(email) {
 
     $.ajax({
-        url: "http://localhost:8084/api/user/emailexist/" + email,
-        type: "GET",
+        url: `http://localhost:8084/api/user/emailexist/${email}`,
+        method: "GET",
         datatype: "JSON",
         contentType: "application/json",
         success: function(response) {
-            console.log(response);
+            //console.log(response);
+            estado = response;
+            //alert(response + "  usrEmailExist");
             return response;
         }
     });
@@ -195,10 +199,11 @@ function getJSONCreate() {
             $("#tipo1-usr").val().length == 0) {
             alert("Por favor llene todos los campos de registro solicitados.");
         } else {
-            let inEmail = $.trim($("#email1-usr").val());
-            console.log
-            let emailExist = usrEmailExist(inEmail);
-            if (emailExist == true) {
+            //let inEmail = $.trim($("#email1-usr").val());
+            //console.log
+            // let emailExist = usrEmailExist(valEmail);
+            //alert(usrEmailExist(valEmail) + " validar si trael el valmail " + valEmail);
+            if (estado == true) {
                 alert("Esta cuenta de correo ya existe en el sistema. Por favor intente ingresando otra cuenta.");
             } else {
                 let usrData1 = {
@@ -217,7 +222,6 @@ function getJSONCreate() {
     }
 
 }
-
 
 function jqueryPOST(url, data) {
     return $.ajax({
